@@ -9,11 +9,12 @@ use Symfony\Component\Scheduler\Schedule;
 use Symfony\Component\Scheduler\ScheduleProviderInterface;
 
 #[AsSchedule]
-class DailyScheduler implements ScheduleProviderInterface
+readonly class DailyScheduler implements ScheduleProviderInterface
 {
     public function __construct(
-        private readonly int $jeanHourCron,
-        private readonly int $anneSophieHourCron,
+        private int    $jeanHourCron,
+        private int    $anneSophieHourCron,
+        private string $codeurCron
     )
     {
 
@@ -25,7 +26,8 @@ class DailyScheduler implements ScheduleProviderInterface
             RecurringMessage::cron("0 $this->jeanHourCron * * *", new ExecuteCommandMessage('app:discord:send-today-corvees', ['user' => 'Jean'])),
             RecurringMessage::cron("0 $this->anneSophieHourCron * * *", new ExecuteCommandMessage('app:discord:send-today-corvees', ['user' => 'Anne-Sophie'])),
             RecurringMessage::cron("0 0 * * *", new ExecuteCommandMessage('app:corvee:clear')),
-            RecurringMessage::cron("0 0 * * *", new ExecuteCommandMessage('app:supermarket-item:clear')),
+            RecurringMessage::cron("* * * * *", new ExecuteCommandMessage('app:supermarket-item:clear')),
+            RecurringMessage::cron($this->codeurCron, new ExecuteCommandMessage('app:codeur:send-offer'))
         );
     }
 }

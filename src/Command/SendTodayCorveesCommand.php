@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\Business\CorveeBusiness;
-use App\Business\DiscordBusiness;
 use App\Model\Corvee;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

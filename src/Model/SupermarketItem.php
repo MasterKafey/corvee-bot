@@ -6,7 +6,7 @@ class SupermarketItem
 {
     private string $name;
 
-    private ?int $quantity;
+    private ?string $quantity;
 
     private ?string $unit;
 
@@ -25,12 +25,12 @@ class SupermarketItem
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getQuantity(): ?string
     {
         return $this->quantity;
     }
 
-    public function setQuantity(?int $quantity): self
+    public function setQuantity(?string $quantity): self
     {
         $this->quantity = $quantity;
         return $this;

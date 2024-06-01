@@ -25,6 +25,9 @@ services:
             tags:
                 - { name: 'app.discord.command' }
 
+    League\HTMLToMarkdown\HtmlConverterInterface:
+        class: League\HTMLToMarkdown\HtmlConverter
+
     App\Business\UserBusiness:
         arguments:
             $userFilePath: '%kernel.project_dir%/users.yaml'
@@ -39,8 +42,18 @@ services:
         arguments:
             $jeanHourCron: '%env(APP_JEAN_HOUR_CRON)%'
             $anneSophieHourCron: '%env(APP_ANNE_SOPHIE_HOUR_CRON)%'
+            $codeurCron: '%env(APP_CODEUR_CRON)%'
 
     App\Command\SendMessageCommand:
         arguments:
             - '%env(DISCORD_BOT_TOKEN)%'
             - '/'
+
+    App\Command\ClearHistoryCommand:
+        arguments:
+            $token: '%env(DISCORD_BOT_TOKEN)%'
+            $prefix: '/'
+
+    App\Command\SendCodeurOffer:
+        arguments:
+            $codeurFilePath: '%kernel.project_dir%/codeur.yaml'
