@@ -1,0 +1,46 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    Discord\DiscordCommandClient:
+        factory:
+            - App\Discord\Factory\BotFactory
+            - getDiscord
+        arguments:
+            - '%env(DISCORD_BOT_TOKEN)%'
+            - '/'
+
+    _instanceof:
+        App\Discord\Command\CommandInterface:
+            tags:
+                - { name: 'app.discord.command' }
+
+    App\Business\UserBusiness:
+        arguments:
+            $userFilePath: '%kernel.project_dir%/users.yaml'
+
+    App\Business\GoogleSheetBusiness:
+        arguments:
+            $credentialsFilePath: '%kernel.project_dir%/credentials.json'
+            $corveeSpreadsheetId: '%env(APP_CORVEE_SPREADSHEET_ID)%'
+            $courseListSpreadsheetId: '%env(APP_LIST_COURSE_SPREADSHEET_ID)%'
+
+    App\Scheduler\DailyScheduler:
+        arguments:
+            $jeanHourCron: '%env(APP_JEAN_HOUR_CRON)%'
+            $anneSophieHourCron: '%env(APP_ANNE_SOPHIE_HOUR_CRON)%'
+
+    App\Command\SendMessageCommand:
+        arguments:
+            - '%env(DISCORD_BOT_TOKEN)%'
+            - '/'

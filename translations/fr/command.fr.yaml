@@ -1,0 +1,45 @@
+today:
+    usage: '/today'
+    description: "Afficher les corvées d'aujourd'hui"
+    longDescription: "Permet d'afficher les corvées d'aujourd'hui depuis le google docs 'Les trucs à faire'"
+    action:
+        corvee:
+            empty: "Vous avez terminé toutes vos tâches aujourd'hui ! **Félicitations**"
+            today:
+                single: "Aujourd'hui vous avez une tâche à faire :"
+                multiple: "Aujourd'hui vous avez %corvee_number% tâches à faire :"
+            late:
+                single: "Vous avez une tâche en retard à faire :"
+                multiple: "Vous avez %corvee_number% tâches en retard à faire :"
+            future:
+                single: "Vous avez une tâche à venir :"
+                multiple: "Vous avez %corvee_number% tâches à venir :"
+            description: '- %content% %together%'
+set-user:
+    description: 'Permet de vous identifier dans les taches à faire'
+    longDescription: "Permet de m'indiquer quelle utilisateur Discord correspond à Anne-Sophie ou à Jean"
+    usage: '/set-user <Anne-Sophie|Jean>'
+    invalid_usage: 'Vous avez mal utilisé la command : /set-usage <Anne-Sophie|Jean>'
+    invalid_name: 'Le nom %name% renseigné ne correspond pas à Anne-Sophie ou Jean'
+    success: "Bonjour %name% ! J'ai bien pris en compte votre demande ! Vous recevrez maintenant les notifications qui vous sont destinées"
+
+get-supermarket-item:
+    usage: '/get-supermarket-item'
+    description: 'Afficher les articles à acheter'
+    longDescription: "Permet d'afficher les articles à acheter dans le google docs 'Liste de course'"
+    action:
+        title: "Liste de course : \n"
+        empty: "Liste de course vide !"
+        item: '- %quantity%%unit% %name% %comment%'
+
+tomorrow:
+    usage: '/tomorrow'
+    description: 'Afficher les corvées de demain'
+    longDescription: "Permet d'afficher les corvées de demain depuis le google docs 'Les trucs à faire'"
+    action:
+        corvee:
+            empty: "Vous n'avez pas de tâches demain."
+            title:
+                single: "Vous avez une tâche demain :"
+                multiple: "Vous avez %corvee_number% tâches demain :"
+            description: '- %content% %together%'
